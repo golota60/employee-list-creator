@@ -5,12 +5,11 @@ const app = express();
 
 require('dotenv').config();
 
+//We're not providing any PORT in the env variables, so it's going to use port 5000 by default
 const PORT = process.env.PORT || 5000;
 const URI = process.env.LOCAL_URI!;
 
-//body parser
 app.use(express.json());
-
 //CORS config
 app.use(cors());
 
