@@ -3,6 +3,8 @@ import Employee from '../models/Employee';
 import IEmployee from '../interfaces/IEmployee';
 import { userInfo } from 'os';
 import { checkItemEligibility, assignEmployees } from '../utils/utils';
+import EmployeeList from '../models/EmployeeList';
+import IEmployeeList from '../interfaces/IEmployeeList';
 const router = express.Router();
 
 const MAX_TEAM_SIZE = 5;
@@ -25,6 +27,11 @@ router.post(
   '/generateList',
   async (req: express.Request, res: express.Response) => {
     const requestBody: GenerateListRequestBody = req.body;
+    if (!requestBody.listName || !requestBody.teamSize) {
+      return res.status(400).json({
+        message: `You didn't provide listName and/or teamSize`,
+      });
+    }
 
     if (requestBody.teamSize > MAX_TEAM_SIZE) {
       return res.status(400).json({
@@ -43,20 +50,23 @@ router.post(
       });
     }
 
-    const numberOfTeams = Math.ceil(allEmployees.length / requestBody.teamSize);
+    let [result, unassignedEmployees] = assignEmployees(
+      allEmployees,
+      requestBody.teamSize,
+    );
 
-    let result = assignEmployees(allEmployees, requestBody.teamSize);
-
-    console.log('result', result);
-    console.log('actual number of teams', result.length);
-    console.log('expected number of teams', numberOfTeams);
-    console.log('allEmployees', allEmployees.length);
+    let list = new EmployeeList({
+      name: requestBody.listName,
+      list: result,
+      unassignedList: unassignedEmployees,
+    });
+    await list.save();
+    console.log('List saved');
 
     let allpeoplecheck = 0;
     result.forEach(array => {
       allpeoplecheck += array.length;
     });
-    console.log('people assigned to teams', allpeoplecheck);
     //Check if it's possible to split into teams
 
     return res.json({ msg: allpeoplecheck });
