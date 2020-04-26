@@ -28,6 +28,26 @@ export const checkItemEligibility = (
   return returnValue;
 };
 
+// export const checkArrayEligibility = (
+//   arrayToCheck: Array<IEmployee>,
+//   chunkIndex: number,
+//   index: number,
+// ): number => {
+//   let eligible = checkItemEligibility(
+//     resultArray[chunkIndex],
+//     allEmployees[index],
+//   );
+//   if (eligible) {
+//     return index;
+//   } else {
+//     if (index >= allEmployees.length - 1) {
+//       return index;
+//     } else {
+//       return checkArrayEligibility(chunkIndex, index + 1);
+//     }
+//   }
+// };
+
 export const assignEmployees = (
   allEmployees: Array<IEmployee>,
   teamSize: number,
@@ -37,46 +57,43 @@ export const assignEmployees = (
   let result: Array<Array<IEmployee>> = allEmployees.reduce(
     (resultArray: Array<Array<IEmployee>>, item, index) => {
       const chunkIndex = Math.floor(index / teamSize);
-      let eligible = true;
 
       if (!resultArray[chunkIndex]) {
         resultArray[chunkIndex] = []; // start a new chunk
       }
-
+      let arrayChunk = resultArray[chunkIndex];
       // if it's the first object added to array it's' eligible by default
       //if it's not the first object check if it's eligible
 
       let addedIndex = 0;
-      function checkEligibility(chunkIndex: number, index: number): number {
-        eligible = checkItemEligibility(
+      function checkArrayEligibility(
+        chunkIndex: number,
+        index: number,
+      ): number {
+        let eligible = checkItemEligibility(
           resultArray[chunkIndex],
           allEmployees[index],
         );
         if (eligible) {
-          console.log('eligible',index, addedIndex);
           return index;
         } else {
-          if (index + addedIndex >= allEmployees.length - 1) {
-            console.log('exceeded maximum index, but we add it anyway', index, addedIndex);
+          if (index >= allEmployees.length - 1) {
             return index;
           } else {
-            console.log('previous item was not eligible', index, addedIndex);
-            addedIndex += 1;
-            return checkEligibility(chunkIndex, index + addedIndex);
+            return checkArrayEligibility(chunkIndex, index + 1);
           }
         }
       }
-      const eligibleIndex = checkEligibility(chunkIndex, index);
+      const eligibleIndex = checkArrayEligibility(chunkIndex, index);
       console.log('eligibleIndex', eligibleIndex);
       //if the item is not eligible, check the next one(s)
+      resultArray[chunkIndex].push(allEmployees[eligibleIndex]);
+      remainingEmployees.splice(
+        remainingEmployees.indexOf(allEmployees[eligibleIndex]),
+        1,
+      );
 
-      if (eligible) {
-        resultArray[chunkIndex].push(allEmployees[eligibleIndex]);
-        remainingEmployees.splice(
-          remainingEmployees.indexOf(allEmployees[eligibleIndex]),
-          1,
-        );
-      } //if the item is eligibe to be added, add it
+      // allEmployees.splice(allEmployees.indexOf(allEmployees[eligibleIndex]), 1);
 
       return resultArray;
     },

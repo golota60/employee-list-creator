@@ -47,15 +47,16 @@ router.post(
 
     let result = assignEmployees(allEmployees, requestBody.teamSize);
 
+    console.log('result', result);
     console.log('actual number of teams', result.length);
     console.log('expected number of teams', numberOfTeams);
+    console.log('allEmployees', allEmployees.length);
 
     let allpeoplecheck = 0;
     result.forEach(array => {
       allpeoplecheck += array.length;
     });
     console.log('people assigned to teams', allpeoplecheck);
-
     //Check if it's possible to split into teams
 
     return res.json({ msg: 'xd' });
