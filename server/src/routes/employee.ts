@@ -1,18 +1,10 @@
 import express from 'express';
 import Employee from '../models/Employee';
-import IEmployee from '../interfaces/IEmployee';
-import { userInfo } from 'os';
-import { checkItemEligibility, assignEmployees } from '../utils/utils';
+import { assignEmployees } from '../utils/utils';
 import EmployeeList from '../models/EmployeeList';
-import IEmployeeList from '../interfaces/IEmployeeList';
 const router = express.Router();
 
 const MAX_TEAM_SIZE = 5;
-
-// router.get(
-//   '/getEmployees',
-//   (req: express.Request, res: express.Response) => {},
-// );
 
 interface GenerateListRequestBody {
   sameDepartment?: boolean;
