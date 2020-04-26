@@ -3,10 +3,11 @@ import IEmployee from '../interfaces/IEmployee';
 export const checkItemEligibility = (
   arrayToCheck: Array<IEmployee>,
   employee: IEmployee,
+  whitelistArray: Array<IEmployee>,
 ): boolean => {
-  let returnValue: boolean = true;
+  let returnValue: boolean = false;
 
-  if (arrayToCheck.length === 0) {
+  if (arrayToCheck.length === 0 && whitelistArray.includes(employee)) {
     console.log('Its the first item in the new array', employee);
     returnValue = true;
   } else {
@@ -19,8 +20,10 @@ export const checkItemEligibility = (
         console.log('Item is not eligible to be added');
         returnValue = false;
         break;
-      } else {
+      } else if (whitelistArray.includes(employee)) {
         returnValue = true;
+      } else {
+        returnValue = false;
       }
     }
   }
@@ -73,6 +76,7 @@ export const assignEmployees = (
         let eligible = checkItemEligibility(
           resultArray[chunkIndex],
           allEmployees[index],
+          remainingEmployees,
         );
         if (eligible) {
           return index;
