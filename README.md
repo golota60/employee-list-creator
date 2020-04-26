@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/golota60/kadromierz-recruitment.svg?style=shield)](https://circleci.com/gh/golota60/kadromierz-recruitment)
+
 # Setup
 
 1. Download local MongoDB instance (https://www.mongodb.com/download-center/community) and install it locally. 
