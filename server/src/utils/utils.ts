@@ -15,7 +15,8 @@ export const checkItemEligibility = (
       console.log('comapring existing: ', arrayEmployee, ' with ', employee);
       if (
         arrayEmployee.department === employee.department ||
-        arrayEmployee.province === employee.province
+        arrayEmployee.province === employee.province ||
+        arrayEmployee.age === employee.age
       ) {
         console.log('Item is not eligible to be added');
         returnValue = false;

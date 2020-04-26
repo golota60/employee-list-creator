@@ -59,7 +59,7 @@ router.post(
     console.log('people assigned to teams', allpeoplecheck);
     //Check if it's possible to split into teams
 
-    return res.json({ msg: 'xd' });
+    return res.json({ msg: allpeoplecheck });
 
     //newEmployee.save();
   },
