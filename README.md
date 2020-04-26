@@ -16,7 +16,9 @@ LOCAL_URI=mongodb://localhost:27017/<DB_NAME>
 ```
 where <DB_NAME> is what you want your local database to be named.
 
-4. Install yarn from `https://classic.yarnpkg.com/en/docs/install`
+4. Install node.js from `https://nodejs.org/en/download/`
+
+5. Install yarn from `https://classic.yarnpkg.com/en/docs/install`
 
 # Starting
 
@@ -39,6 +41,22 @@ The server is running on port 5000 by default and frontend is running on port 12
 
 To debug backend in Visual Studio Code, simply attach a breakpoint to a line, click F5 - or just go to Run -> Start Debugging. Please note that those shortcuts may be different on your own VSCode configuration.
 
+# Generated Data
+
+The user data is generated from www.json-generator.com with the following code 
+```
+[
+  '{{repeat(500)}}',
+  {
+    _id: '{{objectId()}}',
+    name: '{{firstName()}}',
+    surname: '{{surname()}}',
+    age: '{{integer(18,65)}}',
+    province: '{{random("Leśnica", "Psie Pole", "Polanowice", "Karłowice", "Kowale", "Osobowice", "Nowy Dwór", "Ołbin", "Gaj", "Krzyki", "Klecina", "Maślice", "Kozanów")}}',
+    department: '{{random("HR", "Finances", "Real Estate", "Accountancy", "Marketing", "IT")}}'
+  }
+]
+```
 
 
 
