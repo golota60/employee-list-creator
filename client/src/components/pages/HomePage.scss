@@ -1,0 +1,43 @@
+@import '../../variables.scss';
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  align-items: center;
+  background: rgb(255,255,255);
+  // background: linear-gradient(170deg, rgba(216,245,247,1) 0%, rgba(216,245,247,1) 38.90%, rgba(255,255,255,1) 39%, rgba(255,255,255,1) 64.90%, rgba(216,245,247,1) 65%);
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+    margin-top: 1rem;
+
+    button {
+      margin-bottom: 1rem;
+      background-color: $sea-blue;
+      width: 100%;
+    }
+  }
+
+  .human {
+    &-right-size {
+      position: relative;
+      top: -18rem;
+      left: 22rem;
+    }
+    
+    &-left-size {
+      position: relative;
+      bottom: -20rem;
+      right: 25rem;
+    }
+  }
+}
