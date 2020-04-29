@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/golota60/kadromierz-recruitment.svg?style=shield)](https://circleci.com/gh/golota60/kadromierz-recruitment)
+[![CircleCI](https://circleci.com/gh/golota60/employee-list-creator.svg?style=shield)](https://circleci.com/gh/golota60/employee-list-creator)
 
 # Setup
 
