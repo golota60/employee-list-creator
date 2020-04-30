@@ -1,0 +1,49 @@
+@import '../../variables.scss';
+
+$grid-height: 75vh;
+
+.list-preview-grid {
+  display: grid;
+  grid-template-columns: 20vw 50vw;
+  grid-template-rows: $grid-height;
+
+  .name-list {
+    border: solid 1px $light-gray;
+    .menu {
+      height: 100%;
+      width: 100%;
+      &-internal {
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        .menu-option-internal {
+          font-size: 1.15rem;
+        }
+      }
+    }
+  }
+
+  .grid-panel-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    .textarea-assigned-wrapper {
+      height: $grid-height/2;
+      .assigned-list-textarea {
+        height: 90%;
+        resize: none;
+      }
+    }
+  
+    .textarea-unassigned-wrapper{
+      height: $grid-height/2;
+      .unassigned-list-textarea {
+        height: 90%;
+        resize: none;
+      }
+    }
+
+  }
+
+
+}

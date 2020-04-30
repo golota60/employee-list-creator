@@ -3,7 +3,7 @@ import './TextWrapper.scss';
 
 interface TextWrapperProps {
   className?: string;
-  color?: 'black' | 'light-gray' | 'gray' | 'dark-gray';
+  color?: 'black' | 'light-gray' | 'gray' | 'dark-gray' | 'white';
   children: ReactNode;
   textType?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }

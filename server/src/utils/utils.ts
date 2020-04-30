@@ -66,7 +66,6 @@ export const assignEmployees = (
       if (eligibleIndex === -1) {
         return resultArray;
       }
-      console.log('fasd', allEmployees[eligibleIndex]);
       //if the item is not eligible, check the next one(s)
       resultArray[chunkIndex].push(allEmployees[eligibleIndex]);
 
@@ -80,8 +79,6 @@ export const assignEmployees = (
     },
     [],
   );
-
-  console.log('Unassigned Employees', remainingEmployees);
 
   return [result, remainingEmployees];
 };

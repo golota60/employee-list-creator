@@ -1,22 +1,22 @@
 import React, { ReactNode } from 'react';
-import './HomePageWrapper.scss';
+import './MainPageWrapper.scss';
 import topRightCornerPlant from '../assets/corner-plant-1.svg';
 import bottomRightCornerPlant from '../assets/corner-plant-2.svg';
 import bottomLeftCornerPlant from '../assets/corner-plant-3.svg';
 import topLeftCornerPlant from '../assets/corner-plant-4.svg';
 
-interface HomePageWrapperProps {
+interface MainPageWrapperProps {
   children: ReactNode;
   className?: string;
 }
 
-const HomePageWrapper = ({ children, className }: HomePageWrapperProps) => {
+const MainPageWrapper = ({ children, className }: MainPageWrapperProps) => {
   function createClassName() {
     return className ? className : '';
   }
 
   return (
-    <div className={`home-page-wrapper ${createClassName()}`}>
+    <div className={`main-page-wrapper ${createClassName()}`}>
       <img className="top-right-plant" src={topRightCornerPlant} />
       <img className="bottom-right-plant" src={bottomRightCornerPlant} />
       <img className="bottom-left-plant" src={bottomLeftCornerPlant} />
@@ -26,4 +26,4 @@ const HomePageWrapper = ({ children, className }: HomePageWrapperProps) => {
   );
 };
 
-export default HomePageWrapper;
+export default MainPageWrapper;

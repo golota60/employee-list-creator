@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "Szymon Wiszczuk",
   "dependencies": {
+    "antd": "^4.2.0",
     "bulma": "^0.8.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

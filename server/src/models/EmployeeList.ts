@@ -4,6 +4,7 @@ import IEmployeeList from '../interfaces/IEmployeeList';
 const EmployeeListSchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
     required: true,
   },
   list: {

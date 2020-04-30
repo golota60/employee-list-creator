@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import CreateListPage from './pages/CreateListPage';
 import ViewListPage from './pages/ViewListPage';
 import NotFoundPage from './pages/NotFoundPage';
+import 'antd/dist/antd.css';
 
 interface RouteInterface {
   path: string;
