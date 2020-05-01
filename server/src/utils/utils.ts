@@ -1,6 +1,6 @@
 import IEmployee from '../interfaces/IEmployee';
 
-export const checkItemEligibility = (
+export const _checkItemEligibility = (
   arrayToCheck: Array<IEmployee>,
   employee: IEmployee,
   whitelistArray: Array<IEmployee>,
@@ -28,13 +28,50 @@ export const checkItemEligibility = (
   return returnValue;
 };
 
+function _checkArrayChunkEligibility(
+  chunkIndex: number,
+  index: number,
+  resultArray: Array<Array<IEmployee>>,
+  allEmployees: Array<IEmployee>,
+  remainingEmployees: Array<IEmployee>,
+): number {
+  let eligible = _checkItemEligibility(
+    resultArray[chunkIndex],
+    allEmployees[index],
+    remainingEmployees,
+  );
+  if (eligible) {
+    return index;
+  } else {
+    if (index >= allEmployees.length - 1) {
+      return -1;
+    } else {
+      return _checkArrayChunkEligibility(
+        chunkIndex,
+        index + 1,
+        resultArray,
+        allEmployees,
+        remainingEmployees,
+      );
+    }
+  }
+}
+
+function _deleteEmployeeFromArray(
+  array: Array<IEmployee>,
+  personToBeDeleted: IEmployee,
+) {
+  if (array.includes(personToBeDeleted))
+    array.splice(array.indexOf(personToBeDeleted), 1);
+}
+
 export const assignEmployees = (
   allEmployees: Array<IEmployee>,
   teamSize: number,
 ): [Array<Array<IEmployee>>, Array<IEmployee>] => {
-  const remainingEmployees = [...allEmployees];
+  const unsortedEmployees = [...allEmployees];
 
-  let result: Array<Array<IEmployee>> = allEmployees.reduce(
+  let sortedEmployees: Array<Array<IEmployee>> = allEmployees.reduce(
     (resultArray: Array<Array<IEmployee>>, item, index) => {
       const chunkIndex = Math.floor(index / teamSize);
 
@@ -42,43 +79,29 @@ export const assignEmployees = (
         resultArray[chunkIndex] = []; // start a new chunk
       }
 
-      function checkArrayEligibility(
-        chunkIndex: number,
-        index: number,
-      ): number {
-        let eligible = checkItemEligibility(
-          resultArray[chunkIndex],
-          allEmployees[index],
-          remainingEmployees,
-        );
-        if (eligible) {
-          return index;
-        } else {
-          if (index >= allEmployees.length - 1) {
-            return -1;
-          } else {
-            return checkArrayEligibility(chunkIndex, index + 1);
-          }
-        }
-      }
-      const eligibleIndex = checkArrayEligibility(chunkIndex, index);
+      //check if item with given index is eligible to be added to the chunk
+      const eligibleIndex = _checkArrayChunkEligibility(
+        chunkIndex,
+        index,
+        resultArray,
+        allEmployees,
+        unsortedEmployees,
+      );
 
+      //edge case - there is no employee that can be added to the chunk
       if (eligibleIndex === -1) {
         return resultArray;
       }
-      //if the item is not eligible, check the next one(s)
+
       resultArray[chunkIndex].push(allEmployees[eligibleIndex]);
 
-      if (remainingEmployees.includes(allEmployees[eligibleIndex]))
-        remainingEmployees.splice(
-          remainingEmployees.indexOf(allEmployees[eligibleIndex]),
-          1,
-        );
+      //if our remaining employees includes the person delete it from remaining(unassigned) employees
+      _deleteEmployeeFromArray(unsortedEmployees, allEmployees[eligibleIndex]);
 
       return resultArray;
     },
     [],
   );
 
-  return [result, remainingEmployees];
+  return [sortedEmployees, unsortedEmployees];
 };

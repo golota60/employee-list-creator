@@ -12,11 +12,6 @@ const CreateListPage = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  interface FormHandlerEventInterface {
-    listName: string;
-    teamSize: number;
-  }
-
   async function finishHandle(e: Store) {
     setLoading(true);
     const response = await createList(e.listName, e.teamSize);
@@ -24,6 +19,7 @@ const CreateListPage = () => {
     response.status === 400 ? setError(jsonResponse.message) : '';
     setLoading(false);
   }
+
 
   return (
     <MainPageWrapper>

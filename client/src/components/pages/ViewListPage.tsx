@@ -5,6 +5,7 @@ import {
   fetchListNames,
   FetchListNamesInterface,
   fetchList,
+  removeList,
 } from '../../utils/fetches';
 import { Select } from 'antd';
 import { EmployeeList } from '../../utils/interfaces';
@@ -17,11 +18,15 @@ const ViewListPage = () => {
   const [selectedList, setSelectedList] = useState({} as EmployeeList);
   const [selectedSublistIndex, setSelectedSublistIndex] = useState(0);
 
+  async function fetchAndSetNames() {
+    const names = await fetchListNames();
+    const parsedNames = await names.json();
+    setNames(parsedNames);
+  }
+
   useEffect(() => {
     (async () => {
-      const names = await fetchListNames();
-      const parsedNames = await names.json();
-      setNames(parsedNames);
+      await fetchAndSetNames();
     })();
   }, []);
 
@@ -35,12 +40,18 @@ const ViewListPage = () => {
     setSelectedSublistIndex(selectedIndex);
   }
 
+  async function handleRemoveList(listName: string) {
+    await removeList(listName);
+    await fetchAndSetNames();
+  }
+
   return (
     <MainPageWrapper>
       <div className="list-preview-grid">
         <ListPicker
           names={names}
           nameClick={handleMenuItemClick}
+          removeClick={handleRemoveList}
           title="Your Lists"
           backButtonLink="/home"
         />
@@ -60,7 +71,7 @@ const ViewListPage = () => {
               arrayToDisplay={
                 selectedList.list && selectedList.list[selectedSublistIndex]
               }
-              title="Unassigned employees"
+              title="Assigned employees"
             ></EmployeeTable>
           </div>
           <div className="textarea-unassigned-wrapper">

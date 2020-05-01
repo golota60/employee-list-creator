@@ -18,7 +18,7 @@ interface GenerateListResponseBody {
 }
 
 router.post(
-  '/generateList',
+  '/generate-list',
   async (
     req: express.Request,
     res: express.Response<GenerateListResponseBody>,
@@ -56,7 +56,6 @@ router.post(
         unassignedList: unassignedEmployees,
       });
       await list.save();
-      console.log('List saved');
 
       let allpeoplecheck = 0;
       result.forEach(array => {
@@ -75,8 +74,39 @@ router.post(
   },
 );
 
+interface RemoveListBody {
+  listName: string;
+}
+
+router.post(
+  '/remove-list',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const { listName } = req.body;
+      if (!listName) {
+        return res.status(400).json({
+          message: 'listName was not provided',
+        });
+      }
+
+      const listToRemove = await EmployeeList.findOneAndDelete({
+        name: listName,
+      });
+      if (listToRemove) {
+        return res.json({
+          message: 'list deleted successfully',
+        });
+      }
+    } catch (err) {
+      const errorMessage = `Error while removing list: ${err}`;
+      console.error(errorMessage);
+      return res.status(400).json({ message: errorMessage });
+    }
+  },
+);
+
 router.get(
-  '/getListNames',
+  '/get-list-names',
   async (req: express.Request, res: express.Response) => {
     try {
       const allEmployeeLists = await EmployeeList.find({})
@@ -95,20 +125,23 @@ interface GetListInterface {
   listName: string;
 }
 
-router.post('/getList', async (req: express.Request, res: express.Response) => {
-  const { listName } = req.body;
-  if (!listName) {
-    return res.status(400).json(`listName was not provided`);
-  }
+router.post(
+  '/get-list',
+  async (req: express.Request, res: express.Response) => {
+    const { listName } = req.body;
+    if (!listName) {
+      return res.status(400).json(`listName was not provided`);
+    }
 
-  const employeeList = await EmployeeList.findOne({ name: listName });
-  if (!employeeList) {
-    return res
-      .status(400)
-      .json(`Employee list with given listName does not exist`);
-  }
+    const employeeList = await EmployeeList.findOne({ name: listName });
+    if (!employeeList) {
+      return res
+        .status(400)
+        .json(`Employee list with given listName does not exist`);
+    }
 
-  return res.json(employeeList);
-});
+    return res.json(employeeList);
+  },
+);
 
 export { router as employeeRouter };
