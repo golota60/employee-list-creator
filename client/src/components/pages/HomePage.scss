@@ -6,8 +6,7 @@
   justify-content: center;
   width: 100vw;
   align-items: center;
-  background: rgb(255,255,255);
-  background: linear-gradient(170deg, rgba(216,245,247,1) 0%, rgba(216,245,247,1) 38.90%, rgba(255,255,255,1) 39%, rgba(255,255,255,1) 64.90%, rgba(216,245,247,1) 65%);
+  background: $home-page-gradient;
 
   .main-menu {
     display: flex;
@@ -32,7 +31,6 @@
 
       .button {
         margin-bottom: 1rem;
-        background-color: $sea-blue;
       }
 
     }

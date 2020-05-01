@@ -1,0 +1,14 @@
+@import '../variables.scss';
+
+.employee-table {
+  height: 1rem;
+  * {
+    font-size: 1.5rem;
+  }
+  .ant-table-title {
+    font-weight: 700;
+  }
+  .name-column {
+    color: $light-blue;
+  }
+}

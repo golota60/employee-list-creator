@@ -14,7 +14,8 @@
     "server:dev": "yarn --cwd server server:dev",
     "front": "yarn --cwd client start",
     "all": "concurrently --kill-others \"yarn --cwd client start\" \"yarn --cwd server server\"",
-    "lint": "eslint --ext \".js,.jsx,.ts,.tsx\" client/src server/src"
+    "lint": "eslint --ext \".js,.jsx,.ts,.tsx\" client/src server/src",
+    "purge": "rm -rf node_modules && rm yarn.lock"
   },
   "devDependencies": {
     "@callstack/eslint-config": "^9.1.0",

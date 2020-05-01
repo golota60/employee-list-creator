@@ -6,14 +6,18 @@ import {
   FetchListNamesInterface,
   fetchList,
 } from '../../utils/fetches';
-import { Menu, Input } from 'antd';
-import { EmployeeList } from '../../utils/interfaces';
+import { Menu, Input, Select, Button } from 'antd';
+import { EmployeeList, Employee } from '../../utils/interfaces';
 import TextWrapper from '../generic/TextWrapper';
+import EmployeeTable from '../EmployeeTable';
+import ListPicker from '../ListPicker';
+import { Link } from 'react-router-dom';
 
 const ViewListPage = () => {
   const [names, setNames] = useState([] as Array<FetchListNamesInterface>);
   const [isLoading, setLoading] = useState(true);
   const [selectedList, setSelectedList] = useState({} as EmployeeList);
+  const [selectedSublistIndex, setSelectedSublistIndex] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -30,48 +34,43 @@ const ViewListPage = () => {
     setLoading(false);
   }
 
+  function handleDropdownChange(selectedIndex: number) {
+    setSelectedSublistIndex(selectedIndex);
+  }
+
   return (
     <MainPageWrapper>
       <div className="list-preview-grid">
-        <div className="name-list">
-          <Menu className="menu-internal">
-            {names.map(name => {
+        <ListPicker
+          names={names}
+          nameClick={handleMenuItemClick}
+          title="Your Lists"
+          backButtonLink="/home"
+        />
+        <div className="grid-panel-wrapper">
+          <TextWrapper>Assigned employee list number</TextWrapper>
+          <Select onChange={handleDropdownChange}>
+            {selectedList?.list?.map((list, index) => {
               return (
-                <Menu.Item
-                  className="menu-option-internal"
-                  key={name.name}
-                  onClick={handleMenuItemClick}
-                >
-                  {name.name}
-                </Menu.Item>
+                <Select.Option key={index} value={index}>
+                  {index}
+                </Select.Option>
               );
             })}
-          </Menu>
-        </div>
-        <div className="grid-panel-wrapper">
+          </Select>
           <div className="textarea-assigned-wrapper">
-            <TextWrapper>Assigned Employees</TextWrapper>
-            <Input.TextArea
-              className="assigned-list-textarea"
-              autoSize={false}
-              disabled={isLoading ? true : false}
-              value={
-                selectedList ? JSON.stringify(selectedList.list, null, 2) : ''
+            <EmployeeTable
+              arrayToDisplay={
+                selectedList.list && selectedList.list[selectedSublistIndex]
               }
-            />
+              title="Unassigned employees"
+            ></EmployeeTable>
           </div>
           <div className="textarea-unassigned-wrapper">
-            <TextWrapper>Unassigned Employees</TextWrapper>
-            <Input.TextArea
-              className="unassigned-list-textarea"
-              autoSize={false}
-              disabled={isLoading ? true : false}
-              value={
-                selectedList
-                  ? JSON.stringify(selectedList.unassignedList, null, 2)
-                  : ''
-              }
-            />
+            <EmployeeTable
+              arrayToDisplay={selectedList.unassignedList}
+              title="Unassigned employees"
+            ></EmployeeTable>
           </div>
         </div>
       </div>

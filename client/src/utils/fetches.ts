@@ -40,7 +40,29 @@ export const fetchList = async (
       body: JSON.stringify(body),
     });
   } catch (err) {
-    console.error(`Error during fetchListNames fetch: ${err}`);
+    console.error(`Error during fetchList fetch: ${err}`);
+  }
+  return Promise.reject();
+};
+
+export interface CreateListBody {
+  teamSize: number;
+  listName: string;
+}
+
+export const createList = async (listName: string, teamSize: number) => {
+  const body: CreateListBody = { listName: listName, teamSize: teamSize };
+  console.log(listName,teamSize)
+  console.log(body);
+  console.log(JSON.stringify(body));
+  try {
+    return await fetch(`${URI}/api/generateList`, {
+      method: 'POST',
+      headers: jsonHeaders,
+      body: JSON.stringify(body),
+    });
+  } catch (err) {
+    console.error(`Error during createList fetch: ${err}`);
   }
   return Promise.reject();
 };

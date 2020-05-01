@@ -3,7 +3,7 @@ import './TextWrapper.scss';
 
 interface TextWrapperProps {
   className?: string;
-  color?: 'black' | 'light-gray' | 'gray' | 'dark-gray' | 'white';
+  color?: 'black' | 'light-gray' | 'gray' | 'dark-gray' | 'white' | 'red';
   children: ReactNode;
   textType?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
@@ -51,9 +51,12 @@ const TextWrapper = ({
 
   return (
     <>
-      <div className={createClassName()} style={{ fontSize: createFontSize() }}>
+      <span
+        className={createClassName()}
+        style={{ fontSize: createFontSize() }}
+      >
         {children}
-      </div>
+      </span>
     </>
   );
 };

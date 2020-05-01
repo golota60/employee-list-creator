@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.create-list-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $home-page-gradient;
+
+  .form-wrapper {
+    width: 50rem;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+
+    .ant-row {
+      * {
+        font-size: 1.25rem;
+      }
+    }
+
+    .create-list-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 2rem;
+  
+  
+      .button-container {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  
+    .ant-alert-error {
+      padding: 1rem;
+    }
+    .backend-error {
+      margin-top: 1rem;
+    }
+  }
+
+}

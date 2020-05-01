@@ -8,10 +8,6 @@ const router = express.Router();
 const MAX_TEAM_SIZE = 5;
 
 interface GenerateListRequestBody {
-  sameDepartment?: boolean;
-  sameProvince?: boolean;
-  sameAge?: boolean;
-  strict?: boolean;
   teamSize: number;
   listName: string;
 }
@@ -41,17 +37,13 @@ router.post(
         });
       }
 
-      //TODO: check if list with name exists
-      const allEmployees = await Employee.find({});
-
-      if (
-        allEmployees.length % requestBody.teamSize !== 0 &&
-        requestBody?.strict
-      ) {
+      if (await EmployeeList.exists({ name: requestBody.listName })) {
         return res.status(400).json({
-          message: `Number of employees - ${allEmployees.length} is not divisible by provided number - ${requestBody.teamSize}`,
+          message: `There is already a list with that name`,
         });
       }
+
+      const allEmployees = await Employee.find({});
 
       let [result, unassignedEmployees] = assignEmployees(
         allEmployees,
@@ -109,7 +101,7 @@ router.post('/getList', async (req: express.Request, res: express.Response) => {
     return res.status(400).json(`listName was not provided`);
   }
 
-  const employeeList = await EmployeeList.findOne({ name: listName }, '-_id');
+  const employeeList = await EmployeeList.findOne({ name: listName });
   if (!employeeList) {
     return res
       .status(400)

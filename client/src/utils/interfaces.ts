@@ -14,6 +14,6 @@ export interface Employee extends MongoObject {
 
 export interface EmployeeList extends MongoObject {
   name: string;
-  list: Array<Employee>;
+  list: Array<Array<Employee>>;
   unassignedList: Array<Employee>;
 }

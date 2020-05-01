@@ -1,0 +1,23 @@
+  .name-list {
+    .menu {
+      height: 100%;
+      width: 100%;
+      &-internal {
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        .menu-option-internal {
+          font-size: 1.15rem;
+        }
+      }
+    }
+    .list-picker-title {
+      margin-bottom: 0.8rem;
+      padding-bottom: 1rem;
+    }
+    
+    .back-button {
+      position: relative;
+      top:-10rem;
+    }
+  }
