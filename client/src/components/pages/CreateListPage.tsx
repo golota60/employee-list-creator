@@ -20,7 +20,6 @@ const CreateListPage = () => {
     setLoading(false);
   }
 
-
   return (
     <MainPageWrapper>
       <div className="create-list-page">

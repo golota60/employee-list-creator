@@ -1,10 +1,10 @@
 import React from 'react';
 import './ListPicker.scss';
 import { Menu, Button } from 'antd';
-import { FetchListNamesInterface, removeList } from '../utils/fetches';
+import { FetchListNamesInterface } from '../utils/fetches';
 import TextWrapper from './generic/TextWrapper';
 import { Link } from 'react-router-dom';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined } from '@ant-design/icons';
 
 interface ListPickerProps {
   names: Array<FetchListNamesInterface>;
