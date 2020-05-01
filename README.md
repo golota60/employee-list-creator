@@ -2,11 +2,11 @@
 
 # Setup
 
-1. Download local MongoDB instance (https://www.mongodb.com/download-center/community) and install it locally. 
-Open up MongoDB cluster and connect to your database - URI: `mongodb://localhost:27017/admin`. This is your database management console.
+1. Download local MongoDB instance (https://www.mongodb.com/download-center/community) and install it locally including MongoDB Compass. 
+Open up MongoDB Compass and connect to your database - URI: `mongodb://localhost:27017/admin`. This is your database management console.
 
 
-2. Next, in the 'server' directory create a '.env' file. This file will take care of any variables that we don't want to push to the repository, for example DB connection URI or credentials, if we ever want to switch to a different database.
+2. Clone the repository. Next, in the 'server' directory create a '.env' file. This file will take care of any variables that we don't want to push to the repository, for example DB connection URI or credentials, if we ever want to switch to a different database.
 
 
 > We're using local MongoDB instance, but this approach allows us to swiftly change to MongoDB Atlas if needed.
