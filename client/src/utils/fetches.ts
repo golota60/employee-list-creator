@@ -18,7 +18,7 @@ export const fetchListNames = async (): Promise<TypedResponse<
   Array<FetchListNamesInterface>
 >> => {
   try {
-    return await fetch(`${URI}/api/getListNames`);
+    return await fetch(`${URI}/api/get-list-names`);
   } catch (err) {
     console.error(`Error during fetchListNames fetch: ${err}`);
   }
@@ -34,7 +34,7 @@ export const fetchList = async (
 ): Promise<TypedResponse<EmployeeList>> => {
   const body: FetchListBody = { listName: listName };
   try {
-    return await fetch(`${URI}/api/getList`, {
+    return await fetch(`${URI}/api/get-list`, {
       method: 'POST',
       headers: jsonHeaders,
       body: JSON.stringify(body),
@@ -52,17 +52,32 @@ export interface CreateListBody {
 
 export const createList = async (listName: string, teamSize: number) => {
   const body: CreateListBody = { listName: listName, teamSize: teamSize };
-  console.log(listName, teamSize);
-  console.log(body);
-  console.log(JSON.stringify(body));
   try {
-    return await fetch(`${URI}/api/generateList`, {
+    return await fetch(`${URI}/api/generate-list`, {
       method: 'POST',
       headers: jsonHeaders,
       body: JSON.stringify(body),
     });
   } catch (err) {
     console.error(`Error during createList fetch: ${err}`);
+  }
+  return Promise.reject();
+};
+
+export interface RemoveListBody {
+  listName: string;
+}
+
+export const removeList = async (listName: string) => {
+  const body: RemoveListBody = { listName: listName };
+  try {
+    return await fetch(`${URI}/api/remove-list`, {
+      method: 'POST',
+      headers: jsonHeaders,
+      body: JSON.stringify(body),
+    });
+  } catch (err) {
+    console.error(`Error during removeList fetch: ${err}`);
   }
   return Promise.reject();
 };

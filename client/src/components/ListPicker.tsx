@@ -4,10 +4,12 @@ import { Menu, Button } from 'antd';
 import { FetchListNamesInterface } from '../utils/fetches';
 import TextWrapper from './generic/TextWrapper';
 import { Link } from 'react-router-dom';
+import { CloseOutlined } from '@ant-design/icons';
 
 interface ListPickerProps {
   names: Array<FetchListNamesInterface>;
   nameClick: (e: any) => void;
+  removeClick: (listName: string) => void;
   title?: string;
   backButtonLink?: string;
 }
@@ -15,6 +17,7 @@ interface ListPickerProps {
 const ListPicker = ({
   names,
   nameClick,
+  removeClick,
   title,
   backButtonLink,
 }: ListPickerProps) => {
@@ -32,6 +35,10 @@ const ListPicker = ({
               onClick={nameClick}
             >
               {name.name}
+              <CloseOutlined
+                className="close-icon"
+                onClick={() => removeClick(name.name)}
+              />
             </Menu.Item>
           );
         })}

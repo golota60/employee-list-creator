@@ -1,4 +1,6 @@
-  .name-list {
+@import '../variables.scss';
+
+.name-list {
     .menu {
       height: 100%;
       width: 100%;
@@ -6,8 +8,14 @@
         overflow: auto;
         height: 100%;
         width: 100%;
+        .close-icon {
+          color: $red;
+        }
         .menu-option-internal {
           font-size: 1.15rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
         }
       }
     }
