@@ -52,7 +52,7 @@ export interface CreateListBody {
 
 export const createList = async (listName: string, teamSize: number) => {
   const body: CreateListBody = { listName: listName, teamSize: teamSize };
-  console.log(listName,teamSize)
+  console.log(listName, teamSize);
   console.log(body);
   console.log(JSON.stringify(body));
   try {

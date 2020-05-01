@@ -6,16 +6,14 @@ import {
   FetchListNamesInterface,
   fetchList,
 } from '../../utils/fetches';
-import { Menu, Input, Select, Button } from 'antd';
-import { EmployeeList, Employee } from '../../utils/interfaces';
+import { Select } from 'antd';
+import { EmployeeList } from '../../utils/interfaces';
 import TextWrapper from '../generic/TextWrapper';
 import EmployeeTable from '../EmployeeTable';
 import ListPicker from '../ListPicker';
-import { Link } from 'react-router-dom';
 
 const ViewListPage = () => {
   const [names, setNames] = useState([] as Array<FetchListNamesInterface>);
-  const [isLoading, setLoading] = useState(true);
   const [selectedList, setSelectedList] = useState({} as EmployeeList);
   const [selectedSublistIndex, setSelectedSublistIndex] = useState(0);
 
@@ -31,7 +29,6 @@ const ViewListPage = () => {
     const listFetch = await fetchList(e.key);
     const list = await listFetch.json();
     setSelectedList(list);
-    setLoading(false);
   }
 
   function handleDropdownChange(selectedIndex: number) {

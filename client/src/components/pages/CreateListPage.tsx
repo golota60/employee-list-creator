@@ -5,7 +5,7 @@ import { Form, Input, Radio, Button } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import TextWrapper from '../generic/TextWrapper';
-import { createList, CreateListBody } from '../../utils/fetches';
+import { createList } from '../../utils/fetches';
 import { Store } from 'antd/lib/form/interface';
 
 const CreateListPage = () => {
@@ -69,7 +69,17 @@ const CreateListPage = () => {
                 </TextWrapper>
               </Button>
             </div>
-  {error !== '' ? <TextWrapper textType="h5" className="ant-alert-error backend-error" color="red">{error}</TextWrapper> : <></>}
+            {error !== '' ? (
+              <TextWrapper
+                textType="h5"
+                className="ant-alert-error backend-error"
+                color="red"
+              >
+                {error}
+              </TextWrapper>
+            ) : (
+              <></>
+            )}
           </Form>
         </div>
       </div>

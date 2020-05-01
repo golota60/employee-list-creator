@@ -22,12 +22,16 @@ const HomePage = () => {
           <div className="button-container">
             <Link to="/create/list">
               <Button type="primary" className="button" size="middle">
-                <TextWrapper color="white" textType="h5">Create new lists</TextWrapper>
+                <TextWrapper color="white" textType="h5">
+                  Create new lists
+                </TextWrapper>
               </Button>
             </Link>
             <Link to="/view/lists">
               <Button type="primary" className="button" size="middle">
-                <TextWrapper color="white" textType="h5">See existing lists</TextWrapper>
+                <TextWrapper color="white" textType="h5">
+                  See existing lists
+                </TextWrapper>
               </Button>
             </Link>
           </div>
