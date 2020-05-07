@@ -1,9 +1,7 @@
 {
-  "name": "kadromierz-recruitment",
+  "name": "employee-list-creator",
   "version": "1.0.0",
-  "description": "A setup to bootstrap my react apps fast",
   "author": "Szymon Wiszczuk",
-  "license": "MIT",
   "scripts": {
     "install": "yarn --cwd server && yarn --cwd client",
     "server": "yarn --cwd server server",
